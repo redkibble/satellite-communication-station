@@ -1,0 +1,38 @@
+// generator
+generator client {
+  provider  = "prisma-client-py"
+  interface = "asyncio"
+}
+
+// database
+datasource db {
+  provider = "sqlite"
+  url      = "file:database.sqlite"
+}
+model Satellite{
+  id        Int @id @default(autoincrement())
+  name      String @unique
+  frequency  Int?
+  tlestring String?
+  noradid String?
+  perigee Float?
+  apogee Float?
+  period Float?
+}
+
+model GroundStation{
+  id        Int @id @default(autoincrement())
+  name      String
+  latitude  Float
+  longitude Float
+  height Float
+  elevation Float?
+}
+
+model TrackedSat{
+  id        Int @id @default(autoincrement())
+  satellite String
+  min_elevation Float
+  next_pass DateTime?
+  // TODO: Add Fields for radio, antena and decoder
+}

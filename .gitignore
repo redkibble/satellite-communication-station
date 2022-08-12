@@ -1,0 +1,9 @@
+sgccenv/
+node_modules/
+**/*:Zone.Identifier
+.vscode/
+tles/
+*.pyc
+**/*.pyc
+database.sqlite
+tle.txt

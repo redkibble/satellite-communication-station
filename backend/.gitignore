@@ -1,0 +1,5 @@
+tles/
+*.pyc
+**/*.pyc
+database.sqlite
+tle.txt

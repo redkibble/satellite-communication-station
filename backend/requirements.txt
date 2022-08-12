@@ -1,0 +1,2 @@
+orbit-predictor==1.15.0
+requests==2.28.1
