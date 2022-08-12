@@ -72,7 +72,7 @@ def predict_next_visible_orbit(sat, observer, after_when = None):
     predicted_pass = predictor.get_next_pass(observer,after_when)
     return {"predictor": predictor, "aos": predicted_pass.aos, "los": predicted_pass.los, "tca": predicted_pass.max_elevation_date}
 
-def predict_next_visible_orbits(sat, observer, duration = 86400, after_when = None):
+def predict_next_visible_orbits(sat, observer, duration = 86400, after_when = None, max_elevation_gt = 5):
     """
     Predict all next visible orbit of the satellite for the given duration. Given sattelite name and observer location.
     """
@@ -80,7 +80,7 @@ def predict_next_visible_orbits(sat, observer, duration = 86400, after_when = No
     predictor = TLESource.get_predictor(sat)
     predicted_passes = []
     while True:
-        predicted_pass = predictor.get_next_pass(observer,after_when)
+        predicted_pass = predictor.get_next_pass(observer,after_when, max_elevation_gt)
         after_when = predicted_pass.los
         if predicted_pass.los > dt.datetime.now() + dt.timedelta(seconds=duration):
             break
@@ -113,7 +113,8 @@ async def update_sats_in_db():
     Update the sattelites in the database.
     """
     sattelites = []
-    await prisma.connect()
+    if not prisma.is_connected():
+        await prisma.connect()
     for filename in os.listdir(TLES_DIRECTORY):
         if filename.endswith(".txt"):
             sattelites.append(filename.split(".")[0])
@@ -138,7 +139,6 @@ async def update_sats_in_db():
             )
         except Exception as e:
             print("Error: " + sattelite + e.__str__())
-    await prisma.disconnect()
 
 def doppler_factor(observer_ecf, satellite_ecf, velocity_ecf):
     """

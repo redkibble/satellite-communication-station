@@ -22,7 +22,7 @@ async def get_satellite(satellite_id: int):
     return satellite
 
 @router.get("/{satellite_name}/passes")
-async def get_satellite_passes(satellite_name: str, interval: Optional[int] = 86400):
+async def get_satellite_passes(satellite_name: str, interval: Optional[int] = 86400, elevation: Optional[int] = 5):
     satellite = await prisma.satellite.find_first(
         where={
             'name': satellite_name,
@@ -31,7 +31,7 @@ async def get_satellite_passes(satellite_name: str, interval: Optional[int] = 86
     # TODO: Accept groundstation id in query param. 
     GS = await prisma.groundstation.find_first()
     GS = GroundStation(GS.name, GS.latitude, GS.longitude, GS.height)
-    passes = op.predict_next_visible_orbits(satellite.name, GS.observer, interval)
+    passes = op.predict_next_visible_orbits(satellite.name, GS.observer, interval, elevation)
     return passes
     # return passes
 
