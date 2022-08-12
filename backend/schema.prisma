@@ -36,3 +36,10 @@ model TrackedSat{
   next_pass DateTime?
   // TODO: Add Fields for radio, antena and decoder
 }
+
+model Radio {
+  id       Int @id @default(autoincrement())
+  name      String
+  rtype  String?
+  port  String?
+}

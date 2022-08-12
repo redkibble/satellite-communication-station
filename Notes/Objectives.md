@@ -29,14 +29,18 @@ Given multiple ground stations (A ground station network)
 - [] Integrate Rotors
 - [] Integrate Radios
 - [] Integrate Information processing
-  - Depending on different sattelites
+- Depending on different sattelites
 
 
 / New thigs
 - Allow users to input tle data. 
 - Automate the TLE refresh
-- consider elevation of gs
--  
+- 
+
+### Small TODOs.
+- [ ] Make API Response format consistent.
+- [ ] Refresh TLEs API - handle errors.
+- [x] consider elevation of gs
 
 ### APIS
 
