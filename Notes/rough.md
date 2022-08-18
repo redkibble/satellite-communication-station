@@ -42,7 +42,8 @@ https://www.n2yo.com/
 
 ### For groundtrack visualiisation
 https://observablehq.com/@jake-low/satellite-ground-track-visualizer - uses threejs
-https://github.com/StevenSamirMichael/astrokit - examples directory \n
+https://github.com/StevenSamirMichael/astrokit - examples directory  
+
 Use this for groundtrack and 3d visualisation
 
 ### Other helpful libraries
