@@ -31,7 +31,7 @@ async def get_satellite_passes(satellite_name: str, interval: Optional[int] = 86
     # TODO: Accept groundstation id in query param. 
     GS = await prisma.groundstation.find_first()
     GS = GroundStation(GS.name, GS.latitude, GS.longitude, GS.height)
-    passes = op.predict_next_visible_orbits(satellite.name, GS.observer, interval, elevation)
+    passes = op.predict_next_visible_orbits(satellite.name, GS.observer, interval, None, elevation)
     return passes
     # return passes
 

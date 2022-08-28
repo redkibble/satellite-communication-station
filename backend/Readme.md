@@ -21,6 +21,10 @@ prisma generate
 prisma db push
 
 # Run the app
+
+prisma generate
+prisma db push
+
 uvicorn api.main:app
 # http://127.0.0.1:8000 
 ```
