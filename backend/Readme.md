@@ -9,7 +9,7 @@ LOS stands for Loss of Signal (or Satellite). LOS is the time that a satellite p
 ## Usage
 **Install dependencies**
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Run the program
