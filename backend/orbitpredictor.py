@@ -103,10 +103,13 @@ def break_tles():
         lines = f.readlines()
         print(len(lines))
         for i in range(0, len(lines) - 3, 3):
-            filename = path.join(TLES_DIRECTORY,lines[i].strip().replace("\\", " ").replace("/", " ") + ".txt")
-            with open( filename, "w") as fd:
-                fd.write("\n".join([lines[i].strip(), lines[i+1].strip(), lines[i+2].strip()]))
-                fd.close()
+            try:
+                filename = path.join(TLES_DIRECTORY,lines[i].strip().replace("\\", " ").replace("/", " ") + ".txt")
+                with open( filename, "w") as fd:
+                    fd.write("\n".join([lines[i].strip(), lines[i+1].strip(), lines[i+2].strip()]))
+                    fd.close()
+            except:
+                pass
 
 async def update_sats_in_db():
     """
