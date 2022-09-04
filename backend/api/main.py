@@ -34,4 +34,4 @@ def read_root():
     return {"version": "1.0.0"}
 
 # Guards against HTTP Host Header attacks
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1"])
+# app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "0.0.0.0"])
