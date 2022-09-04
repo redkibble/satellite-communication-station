@@ -1,4 +1,4 @@
-tles/
+tles/*
 *.pyc
 **/*.pyc
 database.sqlite
