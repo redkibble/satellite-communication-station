@@ -12,5 +12,5 @@ apis.include_router(station_router, prefix="/api/station")
 apis.include_router(trackedsats_router, prefix="/api/trackedsats")
 apis.include_router(radio_router, prefix="/api/radio")
 apis.include_router(system_router, prefix="/api/system")
-apis.include_router(webbrowser_router, prefix= "/api/webbrowser")
+apis.include_router(webbrowser_router, prefix= "/webbrowser")
 __all__ = ["apis"]
