@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset = "utf-8">
+	<title>
+        Satellite Name: {{ satellite_name }},
+ 		 
+        Ground Station: {{ city }}
+    </title>
+</head>
+
+<body>
+    <h2>
+    Satellite Name: {{ satellite_name }} <br>
+ 		 
+    Ground Station: {{ city }}
+    </h1>
+    
+    
+    
+    {% for visibilitywindow in passes %}
+    
+    Visibility Start:        {{visibilitywindow.aos}}<br>
+    Visibility End:          {{visibilitywindow.los}} <br>
+    Visibility Duration:     {{visibilitywindow.duration_s}} seconds<br> 
+    Max_Elevation_Epoch:     {{visibilitywindow.max_elevation_date }}  <br>
+    Max_Elevation_Angle:     {{visibilitywindow.max_elevation_deg }} degrees<br>
+    
+    <br><br><br>
+    
+{% endfor %}
+
+</body>
+</html>
