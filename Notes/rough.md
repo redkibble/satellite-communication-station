@@ -51,6 +51,9 @@ https://docs.poliastro.space/en/stable/
 https://rhodesmill.org/skyfield/
 
 
+### Satcom infrastructures, artificial modem
+Based on Iridium Rock7 RockBLOCK modem: https://github.com/acfloria/SatComInfrastructure
+
 **TODO:**
 - [ ] Check this - https://github.com/Krytic/Takahe
 - [ ] https://www.space-track.org/documentation
