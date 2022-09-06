@@ -53,6 +53,7 @@ https://rhodesmill.org/skyfield/
 
 ### Satcom infrastructures, artificial modem
 Based on Iridium Rock7 RockBLOCK modem: https://github.com/acfloria/SatComInfrastructure
+AX 25/FX 25 in Python/Java: https://core.ac.uk/download/pdf/37437186.pdf
 
 **TODO:**
 - [ ] Check this - https://github.com/Krytic/Takahe
