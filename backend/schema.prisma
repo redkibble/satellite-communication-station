@@ -21,7 +21,7 @@ model Satellite{
 }
 
 model GroundStation{
-  id        Int @id @default(autoincrement())
+  id1        Int @id @default(autoincrement())
   name      String
   latitude  Float
   longitude Float
