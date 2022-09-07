@@ -7,10 +7,11 @@ from api.apis.system import router as system_router
 from api.apis.webbrowser import router as webbrowser_router
 
 apis = APIRouter()
+apis.include_router(webbrowser_router, prefix= "/webbrowser")
 apis.include_router(satellite_router, prefix="/api/satellite")
 apis.include_router(station_router, prefix="/api/station")
 apis.include_router(trackedsats_router, prefix="/api/trackedsats")
 apis.include_router(radio_router, prefix="/api/radio")
 apis.include_router(system_router, prefix="/api/system")
-apis.include_router(webbrowser_router, prefix= "/webbrowser")
+
 __all__ = ["apis"]
