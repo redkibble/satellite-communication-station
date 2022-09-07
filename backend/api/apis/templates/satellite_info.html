@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "utf-8">
+    <title> List of Active Satellites </title>
+</head>
+
+
+<body>
+    <h1> List of Active Satellites </h1>
+
+    {%for satellite in satellites%} 
+    Name:{{satellite.name}} | NoradId:{{satellite.noradid}} | Inclination:{{satellite.inclination}} | RAAN:{{satellite.raan}} | Eccentricity:{{satellite.eccentricity}} | ArgPerigee:{{satellite.argperigee}} | MeanAnomaly:{{satellite.meananomaly}} | Period: {{satellite.period}} |
+<!--This is a comment. Comments are not displayed in the browser--
+    This could be a table. a list of orbital parameters of all existing satellites at a glance
+    It's not tle but it's something understandable format -->
+    <br><br>
+{%endfor%}
+</body>
+
+</html>
