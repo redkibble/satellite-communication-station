@@ -10,13 +10,14 @@ datasource db {
   url      = "file:database.sqlite"
 }
 model Satellite{
-  id1        Int @id @default(autoincrement())
+  num        Int @id @default(autoincrement())
   name      String @unique
-  frequency  Int?
-  tlestring String?
   noradid String?
-  perigee Float?
-  apogee Float?
+  inclination Float?
+  raan Float?
+  eccentricity Float?
+  argperigee Float?
+  meananomaly Float?
   period Float?
 }
 
