@@ -8,7 +8,7 @@ from api.apis import apis
 from api.prisma import prisma
 
 app = FastAPI(
-    title="Ground station API",
+    title="Ground Station API",
     openapi_url="/openapi.json",
     docs_url="/",
 )
