@@ -1,9 +1,11 @@
 import math
 from orbit_predictor.sources import EtcTLESource
+from orbit_predictor import groundtrack
 from os import path
 import os
 import transforms
 import datetime as dt
+import datetimerange as dtr
 import time
 import requests
 from api.prisma import prisma
@@ -89,11 +91,20 @@ def predict_next_visible_orbits(sat, observer, duration = 86400, after_when = No
             "aos": predicted_pass.aos,
             "los": predicted_pass.los,
             "duration_s": predicted_pass.duration_s,
-            "max_elevation_date": predicted_pass.max_elevation_date,
-            "max_elevation_deg": predicted_pass.max_elevation_deg,
-            "max_elevation_position": predicted_pass.max_elevation_position,
+            #"max_elevation_date": predicted_pass.max_elevation_date,
+            #"max_elevation_deg": predicted_pass.max_elevation_deg,
+            #"max_elevation_position": predicted_pass.max_elevation_position,
         })
     return predicted_passes
+
+def gtrack(sat,time = None):
+    TLESource = EtcTLESource(filename=path.join(TLES_DIRECTORY,sat + ".txt"))
+    predictor = TLESource.get_predictor(sat)
+    times = dtr(dt.now(), dt.now + dt.timedelta(hours = 48))
+    times = times.range(dt.timedelta(min = 1))
+    gt = groundtrack.compute_groundtrack(predictor,times = times.range(dt.timedelta(min = 1)),elevation_api = groundtrack.ZeroElevation)
+    return gt
+
 
 def break_tles():
     """
@@ -128,8 +139,15 @@ async def update_sats_in_db():
             predictor = TLESource.get_predictor(sattelite)
             sat = {
                         'name': sattelite,
-                        'noradid': predictor.sate_id,
-                        'period': predictor.period,
+                        'noradid': predictor.noradid,
+                        'inclination': predictor.inclination,
+                        'eccentricity': predictor.eccentricity,
+                        'raan': predictor.raan,
+                        'argperigee': predictor.argperigee,
+                        'meananomaly': predictor.meananomaly,
+                        'period': predictor.period
+
+
             }
             result = await prisma.satellite.upsert(
                 where={
@@ -141,7 +159,7 @@ async def update_sats_in_db():
                 }
             )
         except Exception as e:
-            print("Error: " + sattelite + e.__str__())
+            print("Error: " + sattelite +' '+ e.__str__())
 
 def doppler_factor(observer_ecf, satellite_ecf, velocity_ecf):
     """
@@ -172,11 +190,11 @@ def doppler_factor(observer_ecf, satellite_ecf, velocity_ecf):
     return (1 + (rangeRate / c) * sign(rangeRate));
 
 # Public Function
-def predict_sattelite(sattelite, observer):
+def predict_satelite(satelite, observer):
     """
     Predict the next visible orbit of the satellite. Given sattelite name and observer location.
     """
-    prediction = predict_next_visible_orbit(sattelite,observer)
+    prediction = predict_next_visible_orbit(satelite,observer)
 
     aosPosition = get_position_at_time(prediction["predictor"], prediction["aos"])
     losPosition = get_position_at_time(prediction["predictor"], prediction["los"])
@@ -187,7 +205,7 @@ def predict_sattelite(sattelite, observer):
     
 
     return {
-        "sattelite": sattelite,
+        "satelite": satelite,
         "aos": {
             "time": prediction["aos"],
             "position": aosPosition,
@@ -219,7 +237,7 @@ def follow_sattelite(sattelite, observer, seconds = 5):
         print(position.position_llh, lookAngles, doppler)
         time.sleep(seconds)
 
-# Piblic Function
+# Public Function
 async def refresh_tles():
     """
     Refresh the TLEs.

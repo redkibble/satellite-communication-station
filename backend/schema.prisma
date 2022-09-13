@@ -10,9 +10,9 @@ datasource db {
   url      = "file:database.sqlite"
 }
 model Satellite{
-  num        Int @id @default(autoincrement())
+  id        Int @id @default(autoincrement())
   name      String @unique
-  noradid String?
+  noradid Int
   inclination Float?
   raan Float?
   eccentricity Float?
@@ -22,7 +22,7 @@ model Satellite{
 }
 
 model GroundStation{
-  id1        Int @id @default(autoincrement())
+  id        Int @id @default(autoincrement())
   name      String
   latitude  Float
   longitude Float
@@ -35,7 +35,7 @@ model TrackedSat{
   satellite String
   min_elevation Float
   next_pass DateTime?
-  // TODO: Add Fields for radio, antena and decoder
+  // TODO: Add Fields for radio, antenna and decoder
 }
 
 model Radio {
