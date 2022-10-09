@@ -14,10 +14,17 @@ app = FastAPI(
 )
 app.include_router(apis)
 
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
 # Sets all CORS enabled origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[str(origin) for origin in []],
+    allow_origins=[str(origin) for origin in origins],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
