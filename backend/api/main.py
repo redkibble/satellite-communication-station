@@ -14,10 +14,10 @@ app = FastAPI(
 )
 app.include_router(apis)
 
-origins = [
-    "",
-    "http://localhost:3000",
-    "http://localhost",
+origins = ['*'
+    #"",
+    #"http://localhost:3000",
+    #"http://localhost",
     #"http://localhost:8080",
 ]
 
